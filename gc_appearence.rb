@@ -9,7 +9,7 @@ class Appearence
 =begin
 # example of an xml_element
     <h4 class="sabertooth_play_header pvs">
-        <div>Single</div>        
+        <div>Single</div>
             <div>
                 <span class="separator"> | </span>
                 <span class="score">TN 12 - RHS 4</span>
@@ -17,8 +17,8 @@ class Appearence
             <div>
                 <span class="separator"> | </span>
                 <span class="outs">2 Outs</span>
-            </div>        
-    </h4>    
+            </div>
+    </h4>
         <section class="pitch_summary pvs">Strike 1 looking, Ball 1, Ball 2, Ball 3, In play.</section>
         <section class="play_description pvs">PlayerB singles on a ground ball to second baseman L Gomez. PlayerA out at 2nd, caught running. PlayerI advances to 3rd. PlayerH scores.</section>
 </td>

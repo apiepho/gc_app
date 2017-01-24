@@ -30,7 +30,7 @@ class Browser
         end
     end
 
-	def build_cache_filename(uri)
+    def build_cache_filename(uri)
         temp = uri.gsub($options.src, "")
         temp = temp[1..-1]
         temp = temp.gsub("/", "_")
@@ -38,8 +38,8 @@ class Browser
         temp = temp.gsub("=", "_")
         temp = temp.gsub("&", "_")
         @cache_filename = "%s/%s.html" % [ $options.cache, temp ]
- 	end
-	
+     end
+
     def goto(uri)
         puts "getting %s ..." % uri if $options.debug
 

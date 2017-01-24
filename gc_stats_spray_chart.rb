@@ -7,9 +7,9 @@ require './gc_stats_base'
 class StatsSprayChart < StatsBase
 
     def initialize(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
-    	super(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
-    	
-    	# need to redo since spray chart table is differnet format
+        super(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
+
+        # need to redo since spray chart table is differnet format
         @names = []
         @syms  = []
         @vals  = []

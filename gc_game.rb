@@ -98,7 +98,7 @@ class Game
                     # spin forward to find next inning
                     (index1..xml_elements_max).each do |index2|
                         element2 = xml_elements[index2]
-                        is_inning_row = (element2.attribute('class').to_s.include?('sabertooth_pbp_inning_row') ? true : false)                        
+                        is_inning_row = (element2.attribute('class').to_s.include?('sabertooth_pbp_inning_row') ? true : false)
                         if is_inning_row
                             xml_elements_array << element2
                             break
@@ -106,14 +106,14 @@ class Game
                     end
                     need_inning = false
                 end
-                xml_elements_array << element1 
+                xml_elements_array << element1
             end
             need_inning = true if element1.attribute('class').to_s.include?('sabertooth_pbp_inning_row')
        end
 
         # build list of inning halfs
         @innings = Innings.new(xml_elements_array)
-        
+
         # get game boxscore (including lineups)
         @boxscore = Boxscore.new(@id)
 

@@ -121,8 +121,8 @@ end
 parser.parse!
 
 if $options.version
-	puts "gc_app: version %s" % GC_APP_VERSION
-	exit
+    puts "gc_app: version %s" % GC_APP_VERSION
+    exit
 end
 
 # validate options

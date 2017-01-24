@@ -21,7 +21,7 @@ class Innings
                 xml_elements_array << element1
                 ((index1+1)..xml_elements_max).each do |index2|
                     element2 = xml_elements[index2]
-                    is_play_row = (element2.attribute('class').to_s.include?('sabertooth_pbp_row') ? true : false)                        
+                    is_play_row = (element2.attribute('class').to_s.include?('sabertooth_pbp_row') ? true : false)
                     if is_play_row
                         xml_elements_array << element2
                     else

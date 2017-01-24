@@ -5,7 +5,7 @@ require './gc_stats_base'
 require './gc_stats_spray_chart'
 
 class Player
-	attr_reader :id, :name
+    attr_reader :id, :name
 
     def initialize(team_href, player_json)
         # player data comes from roster data json from specific team page (given parameter)
