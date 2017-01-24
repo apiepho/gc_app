@@ -13,18 +13,13 @@ require './gc_teams'
 
 
 # TODO: Summary list of TODO items
+# - merge duplicate players in roster.rb
+
 # - start generation of some stats (batting: PA, BA, OBP, SLG, field: PO E, catch: INN PB SB SB-ATT CS CS% PIK CI)
 # - compare generated stats with GC stats
 
-# - merge duplicate players in roster.rb
-# - change cache files to use .html
-
-# - add copyright to header of all files
 # - add SETUP.TXT (from history)
-# - add README.TXT
 # - add private README with references to sites I used???
-# - generate Linkedin Blurb
-# - new repo for gc_app
 
 
 # General structure:
