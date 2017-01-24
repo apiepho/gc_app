@@ -1,4 +1,7 @@
-# add copyright header
+#
+# Copyright (C) 2017 ThatNameGroup, LLC. and Al Piepho
+#               All Rights Reserved
+#
 
 require './gc_common'
 require './gc_player'

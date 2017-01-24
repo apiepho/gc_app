@@ -10,5 +10,6 @@ end
 
 __END__
 #
-# Copyright (C) 2017 ThatNameGroup, Inc.
+# Copyright (C) 2017 ThatNameGroup, LLC. and Al Piepho
+#               All Rights Reserved
 #
