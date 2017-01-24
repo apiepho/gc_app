@@ -123,6 +123,7 @@ gc_appearence.rb         - builds data about the plate appearance, like balls an
 web crawling/parsing.  This would not be a good solution if the goal was to build an automated
 test structure, but it makes things more efficient for the purposes of the app).
 
+
 Status as of 1-24-2017
 ----------------------
 This is version 0.1.  The first pass of parsing all data is in place and can generate a single large
