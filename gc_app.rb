@@ -18,9 +18,6 @@ require './gc_teams'
 # - start generation of some stats (batting: PA, BA, OBP, SLG, field: PO E, catch: INN PB SB SB-ATT CS CS% PIK CI)
 # - compare generated stats with GC stats
 
-# - add SETUP.TXT (from history)
-# - add private README with references to sites I used???
-
 
 # General structure:
 # (all files require gc_common)

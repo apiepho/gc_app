@@ -1,0 +1,56 @@
+
+This is a very brief description of setting up Ruby on a Mac and executing the gc_app.  It is
+really specific.
+
+All the supporting libraries and tools were installed using Homebrew.  The full set of
+instalation steps can be found in the first reference listed below.  Here are the 
+quick command lines used:
+
+<update to max OS 10.12 or later>
+<install XCode from App store>
+xcode-select --install
+<install git>
+<test if brew installed, if not do the floowing:>
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install gpg
+$ \curl -L https://get.rvm.io | bash -s stable 
+rvm get stable --autolibs=enable
+source ~/.rvm/scripts/rvm
+rvm gemset list
+rvm gemset use global
+rvm gemset list
+gem outdated
+gem update
+gem install nokogiri
+gem install watir
+<cd to your workspace directory>
+git clone https://github.com/apiepho/gc_app.git
+cd gc_app
+
+At this point you can run gc_app.  There are alot of command line options.  I commonly use
+the following:
+
+time ruby gc_app.rb -c ./cache_files -e <email> -p <password>  -o xml -d gc.xml
+
+   time - to see how long it takes
+   -c   - set a directory for caching html pages (for susequent runs)
+   -e   - GC login email
+   -p   - GC login password (sorry, it will show in plain tet on the command line)
+   -o   - output as xml
+   -d   - destination file
+   
+This will produce a large xml file that is best viewed in a browser.  Most browsers will
+let you expand and collapse the xml tags.
+
+
+For further details, here are some sites that were helpful:
+
+http://railsapps.github.io/installrubyonrails-mac.html
+
+http://ruby.bastardsbook.com/chapters/web-inspecting-html/
+
+http://www.w3schools.com/xml/xpath_intro.asp
+
+https://watir.com/
+
+https://github.com/watir/watir
