@@ -10,8 +10,6 @@ require 'watir'
 # browser wrapper for cache support
 class Browser
     def initialize
-        @page_count = 0
-
         if not $options.cache.nil?
             #FileUtils.rm_rf($options.dest)
             FileUtils.mkdir_p($options.cache)
@@ -43,12 +41,17 @@ class Browser
         @cache_filename = "%s/%s.html" % [ $options.cache, temp ]
      end
 
+    def remove_cache_filename
+        # used when something went wrong with parsing
+        FileUtils.rm_rf(@cache_filename) if File.file?(@cache_filename)
+     end
+
     def goto(uri)
         puts "getting %s ..." % uri if $options.debug
 
-        @page_count += 1
-        puts "GC.start, page_count: %d" % @page_count if (@page_count % 10) == 0 and $options.debug
-        GC.start                                      if (@page_count % 10) == 0
+        $total_pages += 1
+        puts "GC.start, total_pages: %d" % $total_pages if ($total_pages % 10) == 0 and $options.debug
+        GC.start                                        if ($total_pages % 10) == 0
 
         build_cache_filename(uri)
 

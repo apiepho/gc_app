@@ -50,9 +50,11 @@ $browser         = nil
 $browser_private = nil
 
 # debug/status
+$total_pages     = 0
 $total_teams     = 0
 $total_players   = 0
 $total_games     = 0
+
 
 class GCParse
 
@@ -65,6 +67,7 @@ class GCParse
         json_encoded = json_encoded.to_s                           # convert MatchData to a string
         json_encoded = json_encoded.gsub("\\u0022", "\"")          # convert unicode quote
         json_encoded = json_encoded.gsub("\\u002D", "-")           # convert unicode hyphen
+        json_encoded = json_encoded.gsub("\\u005C", "\\")          # convert unicode backslash
         json_encoded = json_encoded.gsub(" \$\.parseJSON(\'", "")  # remove leading cruft
         json_encoded = json_encoded.gsub(" \$\.parseJSON(\"", "")  # remove leading cruft
         json_encoded = json_encoded.gsub("\'),", "")               # remove trailing cruft

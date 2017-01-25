@@ -61,6 +61,7 @@ class Teams
         @teams.each do |team|
             team.display_xml
         end
+        puts "<total_pages>%d</total_pages>"     % $total_pages
         puts "<total_teams>%d</total_teams>"     % $total_teams
         puts "<total_players>%d</total_players>" % $total_players
         puts "<total_games>%d</total_games>"     % $total_games

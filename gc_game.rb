@@ -82,6 +82,7 @@ class Game
             puts "." if $options.debug
             temp = $browser.html(true)
         end
+        #temp = $browser.html if seconds > 0
         puts "WARNING: page time out on: %s" % uri if seconds > 30
 
         # parse html with Nokogiri

@@ -97,19 +97,6 @@ class Boxscore
         result
     end
 
-    def get_name(id)
-        name = ""
-        found = false
-        @playerNames.each do |player|
-            if id == player.id
-                name = player.lname
-                found = true
-                break
-            end
-        end
-        name
-    end
-
     def get_players(given_team_id, membership_json)
         result = []
         membership_json.each do |player_id, team_id|
@@ -154,24 +141,41 @@ class Boxscore
         $browser.goto(uri)
         json = $gc_parse.decode($browser.html)
 
-          # get all player names for future descriptions
-        @allPlayers = []
-        playerNames = json["sabertooth_game_context"]["playerNames"]
-        playerNames.each do |player|
-            @allPlayers << PlayerName.new(player)
+        @allPlayers         = []
+        @awayPlayers        = []
+        @awayRoster         = []
+        @awayLineupPitching = []
+        @awayLineupBatting  = []
+        @homePlayers        = []
+        @homeRoster         = []
+        @homeLineupPitching = []
+        @homeLineupBatting  = []
+
+        begin
+            # get all player names for future descriptions
+            playerNames = json["sabertooth_game_context"]["playerNames"]
+            playerNames.each do |player|
+                @allPlayers << PlayerName.new(player)
+            end
+
+            # get players, roster, lineup for away team
+            @awayPlayers        = get_players(        json["sabertooth_transcoder_config"]["awayTeamId"],
+                                                      json["sabertooth_transcoder_config"]["playerTeamMembership"])
+            @awayRoster         = get_roster(         json["game"]["away"]["roster"])
+            @awayLineupPitching = get_pitching_lineup(json["game"]["best_account"]["state"]["lineups"]["away"]["pitching"])
+            @awayLineupBatting  = get_batting_lineup( json["game"]["best_account"]["state"]["lineups"]["away"]["batting"])
+
+            # get players, roster, lineup for home team
+            @homePlayers        = get_players(        json["sabertooth_transcoder_config"]["homeTeamId"],
+                                                      json["sabertooth_transcoder_config"]["playerTeamMembership"])
+            @homeRoster         = get_roster(         json["game"]["home"]["roster"])
+            @homeLineupPitching = get_pitching_lineup(json["game"]["best_account"]["state"]["lineups"]["home"]["pitching"])
+            @homeLineupBatting  = get_batting_lineup( json["game"]["best_account"]["state"]["lineups"]["home"]["batting"])
+        rescue
+            puts "WARNING: could not parse, removing from cache: %s" % uri
+            $browser.remove_cache_filename
         end
 
-        @awayPlayers        = get_players(        json["sabertooth_transcoder_config"]["awayTeamId"],
-                                                  json["sabertooth_transcoder_config"]["playerTeamMembership"])
-        @awayRoster         = get_roster(         json["game"]["away"]["roster"])
-        @awayLineupPitching = get_pitching_lineup(json["game"]["best_account"]["state"]["lineups"]["away"]["pitching"])
-        @awayLineupBatting  = get_batting_lineup( json["game"]["best_account"]["state"]["lineups"]["away"]["batting"])
-
-        @homePlayers        = get_players(        json["sabertooth_transcoder_config"]["homeTeamId"],
-                                                  json["sabertooth_transcoder_config"]["playerTeamMembership"])
-        @homeRoster         = get_roster(         json["game"]["home"]["roster"])
-        @homeLineupPitching = get_pitching_lineup(json["game"]["best_account"]["state"]["lineups"]["home"]["pitching"])
-        @homeLineupBatting  = get_batting_lineup( json["game"]["best_account"]["state"]["lineups"]["home"]["batting"])
     end
 
     def display_players(label, players)
