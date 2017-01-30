@@ -55,10 +55,10 @@ class StatsBase
             name = @names[index]
             val  = @vals[index]
             puts "<_%s_>" % xml_name
-             puts "<name>%s</name>" % name
-               puts "<sym>%s</sym>"   % sym
+            puts "<name>%s</name>" % name
+            puts "<sym>%s</sym>"   % sym
             puts "<val>%s</val>"   % val
-            puts "</_%s_>" % xml_name
+            puts "</_%s_>"         % xml_name
         end
         puts "</%s>" % @stat_name
     end

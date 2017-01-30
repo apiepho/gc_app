@@ -7,6 +7,8 @@ instalation steps can be found in the first reference listed below.  Here are th
 quick command lines used:
 
 <update to max OS 10.12 or later>
+<install chromedriver it <user>/.chromedriver>
+export PATH=$PATH:/Users/<user>/.chromedriver
 <install XCode from App store>
 xcode-select --install
 <install git>
