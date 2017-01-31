@@ -73,17 +73,21 @@ class Game
         uri = GC_PLAYS_URI % @id
         $browser.goto(uri)
 
-        # get body as a string, waiting for javascript to finish populating
+        # get body as a string, waiting for javascript to finish populating if not alread cached
+        # (could be cached without game data)
+        in_cache = $browser.in_cache
         temp = $browser.html
-        seconds = 0
-        while not temp.include?("TOP 1ST") and seconds < 30 do
-            sleep(1)
-            seconds += 1
-            puts "." if $options.debug
-            temp = $browser.html(true)
+        if not in_cache
+            seconds = 0
+            while not temp.include?("TOP 1ST") and not temp.include?("linescore extraWide gameOver") and seconds < 30 do
+                sleep(1)
+                seconds += 1
+                puts "." if $options.debug
+                temp = $browser.html(true)
+            end
+            #temp = $browser.html if seconds > 0
+            puts "WARNING: page time out on: %s" % uri if seconds > 30
         end
-        #temp = $browser.html if seconds > 0
-        puts "WARNING: page time out on: %s" % uri if seconds > 30
 
         # parse html with Nokogiri
         doc = Nokogiri::HTML(temp)

@@ -12,7 +12,10 @@ class StatsSprayChart < StatsBase
     def initialize(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
         super(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
 
-        # need to redo since spray chart table is differnet format
+        # check if we just need a blank instance
+        return if uri_fmt.nil?
+
+        # need to redo since spray chart table is different format
         @names = []
         @syms  = []
         @vals  = []

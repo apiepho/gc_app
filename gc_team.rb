@@ -15,6 +15,7 @@ class Team
         # 1. data gleened from the specific team page href (given parameter)
         # 2. data from the specfic team page
         $total_teams += 1
+        $team_stats_off = false
 
         # parse the team href
         # using http://rubular.com/ to figure out regex for something like

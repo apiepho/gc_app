@@ -172,8 +172,8 @@ class Boxscore
             @homeLineupPitching = get_pitching_lineup(json["game"]["best_account"]["state"]["lineups"]["home"]["pitching"])
             @homeLineupBatting  = get_batting_lineup( json["game"]["best_account"]["state"]["lineups"]["home"]["batting"])
         rescue
-            puts "WARNING: could not parse, removing from cache: %s" % uri
-            $browser.remove_cache_filename
+            puts "WARNING: could not parse: %s" % uri
+            #$browser.remove_cache_filename
         end
 
     end

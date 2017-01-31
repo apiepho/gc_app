@@ -47,18 +47,39 @@ class Player
         team_id  = temp[-1]
         fname    = player_json["fname"].downcase
         linitial = player_json["lname"].downcase[0]
-        @stats_batting_standard    = StatsBase.new(    GC_PLAYER_BATTING_STANDARD_URI,       "stats_batting_standard", fteam, team_id, fname, linitial, @id)
-        @stats_batting_speed       = StatsBase.new(       GC_PLAYER_BATTING_SPEED_URI,          "stats_batting_speed", fteam, team_id, fname, linitial, @id)
-        @stats_batting_team_impact = StatsBase.new(  GC_PLAYER_BATTING_TEAMIMPACT_URI,    "stats_batting_team_impact", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_standard   = StatsBase.new(   GC_PLAYER_PITCHING_STANDARD_URI,      "stats_pitching_standard", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_efficiency = StatsBase.new( GC_PLAYER_PITCHING_EFFICIENCY_URI,    "stats_pitching_efficiency", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_command    = StatsBase.new(    GC_PLAYER_PITCHING_COMMAND_URI,       "stats_pitching_command", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_batter     = StatsBase.new(     GC_PLAYER_PITCHING_BATTER_URI,        "stats_pitching_batter", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_runs       = StatsBase.new(       GC_PLAYER_PITCHING_RUNS_URI,          "stats_pitching_runs", fteam, team_id, fname, linitial, @id)
-        @stats_pitching_pitch      = StatsBase.new(      GC_PLAYER_PITCHING_PITCH_URI,         "stats_pitching_pitch", fteam, team_id, fname, linitial, @id)
-        @stats_fielding_standard   = StatsBase.new(   GC_PLAYER_FIELDING_STANDARD_URI,      "stats_fielding_standard", fteam, team_id, fname, linitial, @id)
-        @stats_fielding_catcher    = StatsBase.new(   GC_PLAYER_FIELDING_CATCHING_URI,       "stats_fielding_catcher", fteam, team_id, fname, linitial, @id)
-        @stats_batting_spray_chart = StatsSprayChart.new( GC_PLAYER_BATTING_SPRAY_URI,     "stats_batting_spray_chart", fteam, team_id, fname, linitial, @id)
+        if $team_stats_off
+            @stats_batting_standard    = StatsBase.new(                               nil,      "stats_batting_standard", fteam, team_id, fname, linitial, @id)
+        else
+            @stats_batting_standard    = StatsBase.new(    GC_PLAYER_BATTING_STANDARD_URI,      "stats_batting_standard", fteam, team_id, fname, linitial, @id)
+        end
+        if @stats_batting_standard.syms.length == 0
+            # looks like stats are disabled, skip attempt to get the rest
+            $team_stats_off = true
+            @stats_batting_speed       = StatsBase.new(                              nil,           "stats_batting_speed", fteam, team_id, fname, linitial, @id)
+            @stats_batting_team_impact = StatsBase.new(                              nil,     "stats_batting_team_impact", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_standard   = StatsBase.new(                              nil,       "stats_pitching_standard", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_efficiency = StatsBase.new(                              nil,     "stats_pitching_efficiency", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_command    = StatsBase.new(                              nil,        "stats_pitching_command", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_batter     = StatsBase.new(                              nil,         "stats_pitching_batter", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_runs       = StatsBase.new(                              nil,           "stats_pitching_runs", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_pitch      = StatsBase.new(                              nil,          "stats_pitching_pitch", fteam, team_id, fname, linitial, @id)
+            @stats_fielding_standard   = StatsBase.new(                              nil,       "stats_fielding_standard", fteam, team_id, fname, linitial, @id)
+            @stats_fielding_catcher    = StatsBase.new(                              nil,        "stats_fielding_catcher", fteam, team_id, fname, linitial, @id)
+             @stats_batting_spray_chart = StatsSprayChart.new(                        nil,     "stats_batting_spray_chart", fteam, team_id, fname, linitial, @id)
+         else
+            $team_stats_off = false
+            @stats_batting_speed       = StatsBase.new(       GC_PLAYER_BATTING_SPEED_URI,          "stats_batting_speed", fteam, team_id, fname, linitial, @id)
+            @stats_batting_team_impact = StatsBase.new(  GC_PLAYER_BATTING_TEAMIMPACT_URI,    "stats_batting_team_impact", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_standard   = StatsBase.new(   GC_PLAYER_PITCHING_STANDARD_URI,      "stats_pitching_standard", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_efficiency = StatsBase.new( GC_PLAYER_PITCHING_EFFICIENCY_URI,    "stats_pitching_efficiency", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_command    = StatsBase.new(    GC_PLAYER_PITCHING_COMMAND_URI,       "stats_pitching_command", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_batter     = StatsBase.new(     GC_PLAYER_PITCHING_BATTER_URI,        "stats_pitching_batter", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_runs       = StatsBase.new(       GC_PLAYER_PITCHING_RUNS_URI,          "stats_pitching_runs", fteam, team_id, fname, linitial, @id)
+            @stats_pitching_pitch      = StatsBase.new(      GC_PLAYER_PITCHING_PITCH_URI,         "stats_pitching_pitch", fteam, team_id, fname, linitial, @id)
+            @stats_fielding_standard   = StatsBase.new(   GC_PLAYER_FIELDING_STANDARD_URI,      "stats_fielding_standard", fteam, team_id, fname, linitial, @id)
+            @stats_fielding_catcher    = StatsBase.new(   GC_PLAYER_FIELDING_CATCHING_URI,       "stats_fielding_catcher", fteam, team_id, fname, linitial, @id)
+            @stats_batting_spray_chart = StatsSprayChart.new( GC_PLAYER_BATTING_SPRAY_URI,    "stats_batting_spray_chart", fteam, team_id, fname, linitial, @id)
+        end
     end
 
     def display_xml

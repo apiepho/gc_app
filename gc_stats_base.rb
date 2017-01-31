@@ -7,17 +7,21 @@
 require './gc_common'
 
 class StatsBase
+    attr_reader :names, :syms, :vals
 
     def initialize(uri_fmt, stat_name, fteam, team_id, fname, linitial, player_id)
-        @stat_name = stat_name
-        uri = uri_fmt % [GC_BASE_URI, fteam, team_id, fname, linitial, player_id]
-        $browser.goto(uri)
-        temp = $browser.html
-
-        # look thru all the th elements to find stats and TLA
         @names = []
         @syms  = []
         @vals  = []
+        @stat_name = stat_name
+
+        # check if we just need a blank instance
+        return if uri_fmt.nil?
+
+        uri = uri_fmt % [GC_BASE_URI, fteam, team_id, fname, linitial, player_id]
+        $browser.goto(uri)
+
+        # look thru all the th elements to find stats and TLA
         doc = Nokogiri::HTML($browser.html)
         ths = doc.css('th')
         ths.each do |th|

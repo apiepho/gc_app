@@ -48,12 +48,14 @@ $options         = nil
 $gc_parse        = nil
 $browser         = nil
 $browser_private = nil
+$team_stats_off  = false
 
 # debug/status
 $total_pages     = 0
 $total_teams     = 0
 $total_players   = 0
 $total_games     = 0
+$debug_count     = 0
 
 
 class GCParse
@@ -62,6 +64,7 @@ class GCParse
     end
 
     def decode(html_str)
+        return "" if html_str.empty?                               # check for empty
         temp = html_str                                            # get body as a string
         json_encoded = temp.match(/ \$\.parseJSON.*$/)             # get the JSON data
         json_encoded = json_encoded.to_s                           # convert MatchData to a string

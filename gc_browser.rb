@@ -46,6 +46,18 @@ class Browser
         FileUtils.rm_rf(@cache_filename) if File.file?(@cache_filename)
      end
 
+    def in_cache
+        result = false
+        cache_off = true if not $options.wrtcache.nil?
+        # test cache read
+        if not $options.cache.nil? and not cache_off
+            if File.file?(@cache_filename)
+                 result = true
+            end
+        end
+        result
+    end
+
     def goto(uri)
         puts "getting %s ..." % uri if $options.debug
 
@@ -59,7 +71,7 @@ class Browser
         # test cache read
         if not $options.cache.nil?
             if File.file?(@cache_filename)
-                 puts "read cache: %s" % @cache_filename  if $options.debug
+                 puts "check cache: %s" % @cache_filename  if $options.debug
                  result = true
             end
         end
@@ -90,6 +102,9 @@ class Browser
 
         # test cache write
         if not $options.cache.nil?
+            if result.nil?
+                result = ""
+            end
             if not File.file?(@cache_filename) and not result.empty?
                  puts "write cache: %s" % @cache_filename if $options.debug
                  File.write(@cache_filename, result)

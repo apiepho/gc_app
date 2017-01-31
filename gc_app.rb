@@ -13,6 +13,8 @@ require './gc_teams'
 
 
 # TODO: Summary list of TODO items
+# - review all caching logic...is confusing
+# - cache from xml
 # - merge duplicate players in roster.rb
 
 # - start generation of some stats (batting: PA, BA, OBP, SLG, field: PO E, catch: INN PB SB SB-ATT CS CS% PIK CI)
@@ -36,7 +38,7 @@ require './gc_teams'
 #   record
 #   roster
 #     player++
-#   games
+#   games (from json)
 #     game++
 
 #  player
@@ -57,6 +59,7 @@ require './gc_teams'
 #   win_lose_tie
 #   innings
 #     inning_half++
+#   boxscore (stats from json)
 
 # inning_half
 #   description
@@ -100,7 +103,7 @@ parser = OptionParser.new do |opt|
     opt.on('-e', '--email <email>',                        'login email for GameChanger')                                    { |o| $options.email        = o    }
     opt.on('-p', '--password <password>',                  'login password for GameChanger')                                 { |o| $options.password     = o    }
     opt.on('-c', '--cache <dir>',                          '(optional) enable auto-cache of web pages')                      { |o| $options.cache        = o    }
-    opt.on('-w', '--write cache only',                      '(optional) force writes of cache')                              { |o| $options.wrtcache     = true }
+    opt.on('-w', '--write cache only',                     '(optional) force writes of cache')                               { |o| $options.wrtcache     = true }
     opt.on('-f', '--offline',                              '(optional) run offline')                                         { |o| $options.offline      = true }
     opt.on('-l', '--list',                                 '(optional) list team urls')                                      { |o| $options.list         = true }
     opt.on('-Y', '--year <YYYY>',                          '(optional) specific year')                                       { |o| $options.year         = o    }
