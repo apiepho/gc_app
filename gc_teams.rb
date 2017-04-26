@@ -50,7 +50,7 @@ class Teams
             result = false
             parts = $options.teams.split(",")
             parts.each do |part|
-                result = true if href.include?("/" + part.strip)
+                result = true if href.include?("/" + part.strip.downcase)
             end
         end
         result

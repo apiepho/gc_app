@@ -123,6 +123,11 @@ gc_appearence.rb         - builds data about the plate appearance, like balls an
 web crawling/parsing.  This would not be a good solution if the goal was to build an automated
 test structure, but it makes things more efficient for the purposes of the app).
 
+Other files:
+ruby_prepend.rb          - a simple tool to add copyrights to the front of all files.
+ruby_strip.rb            - a simple tool to strip all comments (to see actual code w/o comments)
+ruby_tabs.rb             - a tool to replace any tabs with spaces and remove trailing spaces
+
 
 Status as of 1-24-2017
 ----------------------
